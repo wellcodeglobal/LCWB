@@ -1,0 +1,55 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Wellcode Global">
+	<meta name="description" content="Website for Personal Web Design owned by Wellcode Global">
+	<meta name="keywords" content="website, website builder, low cost website, lowcost website, personal web design, design, personal web, wellcode, wellcodeglobal, wellcode global, html, css, scss, javascript, js">
+	<!-- <meta name="robots" content="index, follow"> -->
+	<meta name="copyright" content="Wellcode Global 2018">
+	<meta name="distribution" content="Global">
+	<meta name="rating" content="General">
+	<!-- <meta name="google-site-verification" content="CpVhxvqnJR6-GIBm9ApJMlbPi19U43042P33pRrErSs"> -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>{{.Title}}</title>
+	<!-- <link rel="stylesheet" href="{{.BaseURL}}/assets/css/form.scss"> -->
+	<link rel="stylesheet" href="{{.BaseURL}}/assets/css/form.css">
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="{{.BaseURL}}/assets/js/fontawesome-all.js"></script> -->
+</head>
+
+<body>
+	<form action="/create?step=1" method="post" accept-charset="utf-8">
+		<section class="registration" id="registration">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<form action="/create?step=1" method="POST" accept-charset="utf-8">
+							<div class="field">
+								<input type="text" name="data" id="data" value="{{.data}}" placeholder="" hidden>
+							</div>
+							<div class="field">
+								<input type="text" name="templatename" id="templatename" value="" placeholder="ex. Sport Template" required>
+								<label for="templatename">Template Name</label>
+							</div>
+							<div class="col-12">
+								<div class="d-flex justify-content-center"><button class="btn btn-shadow shadow">Submit</button></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+</body>
+
+</html>
+{{end}}

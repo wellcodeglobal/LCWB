@@ -1,0 +1,94 @@
+CREATE TABLE t_user (
+id SERIAL,
+name varchar,
+email varchar,
+password varchar,
+company varchar,
+phone varchar,
+address varchar,
+date_created timestamp DEFAULT now(),
+session_token varchar,
+role int
+);
+
+CREATE TABLE t_role (
+id SERIAL,
+name varchar
+);
+
+CREATE TABLE t_user_web (
+id SERIAL,
+user_id int,
+web int
+);
+
+CREATE TABLE t_web (
+id SERIAL,
+base_cost bigint,
+maintenance bigint,
+service bigint,
+domain varchar
+);
+
+CREATE TABLE t_web_html (
+id SERIAL,
+web int,
+html int
+);
+
+CREATE TABLE t_html (
+id SERIAL,
+type varchar,
+html_code varchar,
+css_code varchar,
+js_code varchar
+);
+
+CREATE TABLE t_type (
+id SERIAL,
+name varchar
+);
+
+CREATE TABLE t_html_part (
+id SERIAL,
+name varchar,
+type int,
+price bigint,
+html_code varchar,
+css_code varchar,
+js_code varchar
+);
+
+CREATE TABLE t_user_html_part (
+id SERIAL,
+user_id int,
+html_part int
+);
+
+CREATE TABLE t_order (
+id SERIAL,
+total bigint,
+discount bigint,
+tax bigint,
+grand_total bigint,
+date_created timestamp DEFAULT now()
+);
+
+CREATE TABLE t_order_line (
+id SERIAL,
+order_id int, 
+html_part int
+);
+
+
+INSERT INTO t_user(email,password,company,phone,address,role) VALUES ('kevin.rizkhy85@gmail.com','123qwe','Wellcode Global', '087822133669', 'Jl. Jawa 66 Bandung', 1);
+
+INSERT INTO t_role(name) VALUES('Customer');
+INSERT INTO t_role(name) VALUES('Admin');
+
+INSERT INTO t_type(name) VALUES('Navigation');
+INSERT INTO t_type(name) VALUES('Home');
+INSERT INTO t_type(name) VALUES('About 1');
+INSERT INTO t_type(name) VALUES('About 2');
+INSERT INTO t_type(name) VALUES('Contact Form');
+INSERT INTO t_type(name) VALUES('Footer');

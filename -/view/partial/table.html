@@ -1,0 +1,26 @@
+{{define "content"}}
+<script type="text/javascript" src="{{.BaseURL}}assets/js/jQuery-redirect.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+$('#myTable').DataTable({
+data: {{.weblist}},
+destroy: true,
+"scrollX": true,
+columns:[{title:"Id", "visible":false},{title:"Domain"},{title:"Base Cost"},{title:"Maintenance"},{title:"Service"}]
+});
+var table = $('#myTable').DataTable();
+$('#myTable tbody').on('click', 'tr', function () {
+var data = table.row( this ).data();
+$.redirect('http://127.0.0.1:5050/preview', {'web_id': data[0]});
+} );
+});
+</script>
+
+<div style="display: none;">
+  <form id="myForm">
+    <input type="text" name="web_id" id="web_id" value="">
+  </form>
+</div>
+<table id="myTable"  style="width:100%" class="display">
+</table>
+{{end}}

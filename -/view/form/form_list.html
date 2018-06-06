@@ -1,0 +1,57 @@
+{{define "layout"}}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Wellcode Global">
+	<meta name="description" content="Website for Personal Web Design owned by Wellcode Global">
+	<meta name="keywords" content="website, website builder, low cost website, lowcost website, personal web design, design, personal web, wellcode, wellcodeglobal, wellcode global, html, css, scss, javascript, js">
+	<!-- <meta name="robots" content="index, follow"> -->
+	<meta name="copyright" content="Wellcode Global 2018">
+	<meta name="distribution" content="Global">
+	<meta name="rating" content="General">
+	<!-- <meta name="google-site-verification" content="CpVhxvqnJR6-GIBm9ApJMlbPi19U43042P33pRrErSs"> -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="yes" name="apple-touch-fullscreen" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>{{.Title}}</title>
+	<link rel="stylesheet" href="{{.BaseURL}}/assets/css/form_list.css">
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{{.BaseURL}}/assets/js/form_list.js"></script>
+</head>
+<body>
+	<section class="template-divider">
+		<div class="td-wrapper">
+			<form action="/create?step={{.step}}" method="POST" accept-charset="utf-8">
+				<button type="submit">Next</button>
+				<input type="text" name="track" id="track" value="{{.Track}}" hidden>
+				<input type="text" name="path" id="path" value="Navigation Bar/Top/{{.step}}" hidden>
+				{{ range $idx,$i := .array_html }}
+				{{if eq $.type "1"}}
+				<div class="col-12">
+					<div class="td-box" id="{{index $.array_path $idx}}" onclick="setSelectedDiv(this)">
+						{{$i }}
+					</div>
+					<div class="td-title" style="display: none;">
+						<h3>{{index $.array_title $idx}}</h3>
+					</div>
+				</div>
+				{{else}}
+				<div class="col-6">
+					<div class="td-box" id="{{index $.array_path $idx}}">
+						{{$i}}
+					</div>
+					<div class="td-title" style="display: none;">
+						<h3>{{index $.array_title $idx}}</h3>
+					</div>
+				</div>
+				{{end}}
+				{{ end }}
+				<button type="submit">Next</button>
+			</form>
+		</div>
+	</section>
+</body>
+{{end}}
