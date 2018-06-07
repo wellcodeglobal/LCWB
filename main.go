@@ -16,6 +16,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", router.PartialList)
 	r.HandleFunc("/home", router.Home)
+	r.HandleFunc("/web/detail", router.WebDetail)
 	r.HandleFunc("/preview", router.Preview)
 	r.HandleFunc("/sign", router.SignIn)
 	r.HandleFunc("/navbar/{type}/{pID}", router.Navbar)

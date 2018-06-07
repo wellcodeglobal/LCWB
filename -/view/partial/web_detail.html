@@ -1,0 +1,31 @@
+{{define "content"}}
+
+<script type="text/javascript">
+	function preview(){
+		$.redirect('http://127.0.0.1:5050/preview', {'web_id': {{.web_id}}});
+	}
+	function edit(){
+		$.redirect('http://127.0.0.1:5050/preview', {'web_id': {{.web_id}}});
+	}
+</script>
+
+
+<div class="col-12">
+	Domain = {{.domain}}
+</div>
+<div class="col-12">
+	Base Cost = {{.base_cost}}
+</div>
+<div class="col-12">
+	Service = {{.service}}
+</div>
+<div class="col-12">
+	Maintenance = {{.maintenance}}
+</div>
+<div class="col-6">
+	<button onclick="preview()">Lihat Web</button>
+</div>
+<div class="col-6">
+	<button onclick="edit()">Kustomisasi Web</button>
+</div>
+{{end}}

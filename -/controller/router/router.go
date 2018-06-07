@@ -13,6 +13,7 @@ import (
 	home "github.com/wellcode/LCWB/-/controller/home"
 	preview "github.com/wellcode/LCWB/-/controller/preview"
 	sign "github.com/wellcode/LCWB/-/controller/sign"
+	web "github.com/wellcode/LCWB/-/controller/web"
 	file "github.com/wellcode/LCWB/-/model/file"
 	html_exe "github.com/wellcode/LCWB/-/model/html"
 )
@@ -25,6 +26,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 func Preview(w http.ResponseWriter, r *http.Request) {
 	preview.Preview(w, r)
+}
+
+func WebDetail(w http.ResponseWriter, r *http.Request) {
+	web.WebDetail(w, r)
 }
 
 func PartialList(w http.ResponseWriter, r *http.Request) {
