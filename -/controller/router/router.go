@@ -29,6 +29,7 @@ func Preview(w http.ResponseWriter, r *http.Request) {
 }
 
 func WebDetail(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(123)
 	web.WebDetail(w, r)
 }
 
