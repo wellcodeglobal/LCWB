@@ -1,0 +1,14 @@
+package: github.com/wellcode/LCWB
+import:
+- package: github.com/emersion/go-imap
+  subpackages:
+  - client
+- package: github.com/gorilla/mux
+- package: github.com/gorilla/sessions
+- package: github.com/kevinrizkhy/Internal
+  subpackages:
+  - config
+  - db
+  - lib/utility
+- package: github.com/lib/pq
+- package: github.com/scorredoira/email
