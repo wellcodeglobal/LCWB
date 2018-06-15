@@ -2,17 +2,21 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-
 	"github.com/gorilla/mux"
 	config "github.com/wellcode/LCWB/-/config"
 	router "github.com/wellcode/LCWB/-/controller/router"
 	database "github.com/wellcode/LCWB/-/model/db"
+	"net/http"
+	"os"
 )
 
 func main() {
 	fmt.Println("Running on " + config.Base_URL + " ...")
 	database.Connect()
+	addr, err := determineListenAddress()
+	if err != nil {
+		addr = config.Base_Port
+	}
 	r := mux.NewRouter()
 	r.HandleFunc("/", router.PartialList)
 	r.HandleFunc("/home", router.Home)
@@ -29,5 +33,13 @@ func main() {
 	r.HandleFunc("/create", router.Create)
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/view/"))))
 	http.Handle("/assets/", r)
-	http.ListenAndServe(config.Base_Port, r)
+	http.ListenAndServe(addr, r)
+}
+
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
 }
