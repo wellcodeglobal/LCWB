@@ -1,0 +1,6 @@
+package config
+
+const (
+	CAPTCHA_PUBLIC  = "6LdtNDcUAAAAAB78tj0j86p2uWI-kXpIV89wIQUx"
+	CAPTCHA_PRIVATE = "6LdtNDcUAAAAAG8os5UO284yrwH3aTi5xOpv70r7"
+)
