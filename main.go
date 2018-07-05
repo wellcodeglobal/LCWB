@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Running on " + config.Base_URL + " ...")
+	fmt.Println("Running on " + config.Base_Port + " ...")
 	database.Connect()
 	addr, err := determineListenAddress()
 	if err != nil {
@@ -19,9 +19,14 @@ func main() {
 	}
 	r := mux.NewRouter()
 	r.HandleFunc("/", router.PartialList)
+	r.HandleFunc("/logout", router.Logout)
 	r.HandleFunc("/home", router.Home)
+	r.HandleFunc("/weblist", router.WebList)
+	r.HandleFunc("/userlist", router.UserList)
 	r.HandleFunc("/web/detail", router.WebDetail)
+	r.HandleFunc("/user/detail", router.UserDetail)
 	r.HandleFunc("/preview", router.Preview)
+	r.HandleFunc("/edit/html", router.EditHTML)
 	r.HandleFunc("/sign", router.SignIn)
 	r.HandleFunc("/navbar/{type}/{pID}", router.Navbar)
 	r.HandleFunc("/about/{pID}", router.About)
@@ -32,7 +37,7 @@ func main() {
 	r.HandleFunc("/dashboard", router.Dashboard)
 	r.HandleFunc("/create", router.Create)
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/view/"))))
-	http.Handle("/assets/", r)
+	r.PathPrefix("/download/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/file/"))))
 	http.ListenAndServe(addr, r)
 }
 

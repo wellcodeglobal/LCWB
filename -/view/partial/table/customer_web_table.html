@@ -1,0 +1,53 @@
+{{define "content"}}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#myTable').DataTable( {
+        data: {{.weblist}},
+        destroy: true,
+        "scrollX": true,
+        columns:[{title:"Id", "visible":false},{title:"Domain"},{title:"Base Cost"},{title:"Maintenance"},{title:"Service"}],
+    	initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+        fixedHeader: {
+            header: true,
+            footer: true
+        }
+    } );
+    var table = $('#myTable').DataTable();
+    $('#myTable tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        $.redirect('/web/detail', {'web_id': data[0]});
+    } );
+} );
+
+</script>
+<table id="myTable"  style="width:100%" class="display">
+    <tfoot>
+            <tr>
+                <th style="visibility: false">Id</th>
+                <th>Domain</th>
+                <th>Base Cost</th>
+                <th>Maintenance</th>
+                <th>Service</th>
+            </tr>
+        </tfoot>
+</table>
+{{end}}

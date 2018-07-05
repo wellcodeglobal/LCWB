@@ -1,0 +1,109 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Wellcode Global">
+        <meta name="description" content="Website for Personal Web Design owned by Wellcode Global">
+        <meta name="keywords" content="website, website builder, low cost website, lowcost website, personal web design, design, personal web, wellcode, wellcodeglobal, wellcode global, html, css, scss, javascript, js">
+        <!-- <meta name="robots" content="index, follow"> -->
+        <meta name="copyright" content="Wellcode Global 2018">
+        <meta name="distribution" content="Global">
+        <meta name="rating" content="General">
+        <!-- <meta name="google-site-verification" content="CpVhxvqnJR6-GIBm9ApJMlbPi19U43042P33pRrErSs"> -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>Login</title>
+        <link rel="stylesheet" href="/assets/css/home.css">
+        <!-- <link rel="shortcut icon" href="/images/favicon.ico" /> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/js/fontawesome-all.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/assets/js/jQuery-redirect.js"></script>
+    </head>
+    <body>
+        <section class="dashboard" id="dashboard">
+            <div class="d-header shadow-outset-sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 no-padding">
+                            <div class="col-3 no-padding">
+                                <div class="d-logo">
+                                    <p>Personal Web Design</p>
+                                </div>
+                            </div>
+                            <div class="col-9 no-padding">
+                                <div class="col-1 no-padding">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="d-mini" id="d-mini">
+                                            <p class="fas fa-bars"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-11 no-padding">
+                                    <div class="d-personal-box">
+                                        <ul class="d-ul d-flex justify-content-end centered-items">
+                                            <li class="d-notifications" onclick="notifShower()">
+                                                <div class="dropdown-notif" data-toggle="dropdown">
+                                                    <i class="far fa-bell fa-fw notif-bell"></i>
+                                                    <div class="notif-content" id="notif-content">
+                                                        <p>You have 3 new notifications</p>
+                                                        <hr>
+                                                        <ul>
+                                                            <li>
+                                                                <p><i class="fas fa-exclamation-triangle fa-fw"></i> Very long description here that may not fit into the page and may cause design problems</p>
+                                                            </li>
+                                                            <li>
+                                                                <p><i class="fas fa-shopping-cart fa-fw"></i> You have 3 partial templates in the cart</p>
+                                                            </li>
+                                                            <li>
+                                                                <p><i class="fas fa-user fa-fw"></i> You change your password</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <div class="d-personal-details d-flex">
+                                                <li>
+                                                    <div class="d-personal-img">
+                                                        <img src="http://via.placeholder.com/25x25" alt="User's Picture">
+                                                    </div>
+                                                </li>
+                                                <li onclick="location.href = '/logout'">
+                                                    <p>{{.name}}</p>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 no-padding" id="d-sidebar">
+                        {{template "navbar" .}}
+                    </div>
+                    <div class="col-9 no-padding" id="d-content">
+                        <div class="d-content">
+                            {{template "content" .}}
+                            <div class="d-proceed-btn">
+                                <a href="" class="btn btn-white btn-rounded shadow-outset-sm">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    <script type="text/javascript" src="/assets/js/home.js"></script>
+</html>
+{{end}}

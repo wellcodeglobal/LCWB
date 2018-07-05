@@ -1,0 +1,17 @@
+{{define "content"}}
+
+<form action="/{{.submit_link}}" method="post" accept-charset="utf-8">
+	<input type="text" name="previous" value="{{.previous}}" hidden>
+	<input type="text" name="html_id" value="{{.html_id}}" hidden>
+	<input type="text" name="type" value="{{.type}}" hidden>
+<select name="new_part">
+{{ range $i := .html_part_list }}
+	<option value="{{index $i 0}}" >{{index $i 1}}</option>
+{{end}}
+</select>
+<button type="submit">Next</button>
+</form>
+
+
+
+{{end}}

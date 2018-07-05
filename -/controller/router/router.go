@@ -10,10 +10,13 @@ import (
 	"github.com/gorilla/mux"
 	config "github.com/wellcode/LCWB/-/config"
 	create "github.com/wellcode/LCWB/-/controller/create"
+	edithtml "github.com/wellcode/LCWB/-/controller/edit_html"
 	home "github.com/wellcode/LCWB/-/controller/home"
 	preview "github.com/wellcode/LCWB/-/controller/preview"
 	sign "github.com/wellcode/LCWB/-/controller/sign"
+	user "github.com/wellcode/LCWB/-/controller/user"
 	web "github.com/wellcode/LCWB/-/controller/web"
+
 	file "github.com/wellcode/LCWB/-/model/file"
 	html_exe "github.com/wellcode/LCWB/-/model/html"
 )
@@ -24,13 +27,32 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	home.Home(w, r)
 }
 
+func Logout(w http.ResponseWriter, r *http.Request) {
+	sign.SignOut(w, r)
+}
+
+func EditHTML(w http.ResponseWriter, r *http.Request) {
+	edithtml.EditHTML(w, r)
+}
+
 func Preview(w http.ResponseWriter, r *http.Request) {
 	preview.Preview(w, r)
 }
 
+func WebList(w http.ResponseWriter, r *http.Request) {
+	web.WebList(w, r)
+}
+
+func UserList(w http.ResponseWriter, r *http.Request) {
+	user.UserList(w, r)
+}
+
 func WebDetail(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(123)
 	web.WebDetail(w, r)
+}
+
+func UserDetail(w http.ResponseWriter, r *http.Request) {
+	user.UserDetail(w, r)
 }
 
 func PartialList(w http.ResponseWriter, r *http.Request) {

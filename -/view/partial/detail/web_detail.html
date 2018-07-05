@@ -1,0 +1,53 @@
+{{define "content"}}
+
+<script type="text/javascript">
+	function preview(){
+		$.redirect('/preview', {'html_id': {{.web_id}}});
+	}
+	function edit(){
+		$.redirect('/edit/html', {'html_id': {{.web_id}},'type':1,'previous': {{.previous}}});
+	}
+</script>
+
+<div class="col-12">
+	Domain = {{.domain}}
+</div>
+<div class="col-12">
+	Base Cost = {{.base_cost}}
+</div>
+<div class="col-12">
+	Service = {{.service}}
+</div>
+<div class="col-12">
+	Maintenance = {{.maintenance}}
+</div>
+<br>
+<hr style="border: solid 2px black !important;">
+<br>
+<hr>
+<div class="col-3">
+	Type
+</div>
+<div class="col-9">
+	Name
+</div>
+<hr>
+{{ range $i := .arr_part }}
+<div class="col-3">
+	{{index $i 6}}
+</div>
+<div class="col-9">
+	{{index $i 2}}
+</div>
+{{end}}
+<br>
+<hr style="border: solid 2px black !important;">
+<br>
+<div class="col-6">
+	<button onclick="preview()">Lihat Web</button>
+</div>
+<div class="col-6">
+	<button onclick="edit()">Kustomisasi Web</button>
+</div>
+
+{{end}}

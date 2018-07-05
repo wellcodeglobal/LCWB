@@ -1,4 +1,4 @@
-package home
+package web
 
 import (
 	"fmt"
@@ -8,9 +8,7 @@ import (
 	"net/http"
 )
 
-var t *template.Template
-
-func Home(w http.ResponseWriter, r *http.Request) {
+func WebList(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	session_val := session.CheckSession(r)
 	if session_val != nil {
@@ -24,7 +22,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 				"-/view/partial/table/customer_web_table.html",
 			)
 		} else {
-			data["userlist"] = template.JS(user.GetUserList())
+			data["weblist"] = template.JS(user.GetUserWebList(sesion_str))
 			t, _ = template.ParseFiles(
 				"-/view/partial/layout.html",
 				"-/view/partial/base/admin/admin_navbar.html",
@@ -35,4 +33,5 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Redirect(w, r, "/sign", 302)
 	}
+
 }
