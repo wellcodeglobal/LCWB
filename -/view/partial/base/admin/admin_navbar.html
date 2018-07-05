@@ -1,29 +1,11 @@
 {{define "navbar"}}
-<div class="d-sidebar shadow-outset-sm" id="a">
-	<div class="accordionWrapper w-100">
-		<div class="accordionItem open">
-			<p class="accordionItemHeading">Account</p>
-			<div class="accordionItemContent">
-				<ul>
-					<a href="">
-						<li>Edit Profile</li>
-					</a>
-				</ul>
-			</div>
-			<div class="accordionItem close">
-				<p class="accordionItemHeading">Manage</p>
-				<div class="accordionItemContent">
-					<ul>
-						<a href="">
-							<li>User</li>
-						</a>
-						<a href="">
-							<li>HTML Part</li>
-						</a>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="mdl-layout__drawer sidenav">
+	<span class="mdl-layout-title mdl-color--blue-500 mdl-color-text--blue-grey-50">Title</span>
+	<nav class="mdl-navigation">
+		<a class="mdl-navigation__link active" href="/home"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
+		<a class="mdl-navigation__link" href="/userlist"><i class="material-icons">description</i><span>Manage User</span></a>
+		<a class="mdl-navigation__link" href="/htmlpart"><i class="material-icons">description</i><span>Manage Part</span></a>
+		<a class="mdl-navigation__link" href="/account"><i class="material-icons">account_box</i><span>My Account</span></a>
+	</nav>
 </div>
 {{end}}

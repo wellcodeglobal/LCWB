@@ -1,0 +1,116 @@
+header {
+  .mdl-layout__drawer {
+    border-right: 0;
+  }
+  .mdl-layout__drawer .mdl-layout-title {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  }
+  .search input {
+    border-bottom: 0;
+  }
+  .search label {
+    color: rgba(255,255,255,0.6);
+  }
+  .user_img {
+    border-radius: 24px;
+    width:40px;
+  }
+}
+
+.sidenav {
+  background-color: #fff;
+  border-right: 0;
+  
+  .mdl-layout-title {
+    box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px, rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.117647) 0px 1px 5px 0px;
+  }
+  .mdl-navigation__link.active {
+    color: #2196F3;
+  }
+  .mdl-navigation__link span {
+    padding-left: 16px;
+  }
+}
+
+.mdl-layout__content {
+  background-color: #e0e0e0;
+}
+
+.account_action {
+  .action {
+    cursor: pointer;
+  }
+  .inner {
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: #fff;
+  }
+  .inner .material-icons {
+    padding: 5px 10px 0px 0px;
+    font-size: 40px;
+    color: #2196F3;
+    border-right: 1px solid rgba(117, 117, 117, 0.53);
+  }
+  .inner span {
+    display: inline-block;
+    vertical-align: top;
+    padding: 14px 10px;
+    font-size: 14px;
+    color: #757575;
+  }
+}
+.account_manage,
+.group_manage {
+  color: #757575;
+  overflow-x: auto;
+  background-color: #fff;
+  
+  table td {
+    color: #000;
+    &.name {
+      color: #2196F3;
+    }
+  }
+}
+.account_manage {
+  .title {
+    padding-bottom: 10px;
+  }
+  #manage-user-filter {
+    float: right;
+    text-transform: capitalize;
+    background-color: #fff;
+    color: #757575;
+    box-shadow: 0 1px 0px 0 rgba(0,0,0,.14),0 0 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  }
+}
+
+#action_person_dialog,
+#action_group_dialog{
+  width: 600px;
+  .mdl-dialog__title {
+    color: #757575;
+  }
+  .mdl-textfield {
+    width: 100%;
+  }
+}
+
+.breadcrumbs {
+  float: right;
+  padding: 0;
+  margin: 0;
+  list-style:none
+}
+.breadcrumbs>li {
+  display:inline-block
+}
+.breadcrumbs>li+li:before {
+  padding:0 5px;
+  color:#ccc;
+  content:"/\00a0"
+}
+.breadcrumbs .active {
+  font-weight:normal;
+  color:#999
+}

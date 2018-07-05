@@ -1,109 +1,58 @@
 {{define "layout"}}
-<!DOCTYPE html>
-<html>
+<html lang="en" >
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Wellcode Global">
-        <meta name="description" content="Website for Personal Web Design owned by Wellcode Global">
-        <meta name="keywords" content="website, website builder, low cost website, lowcost website, personal web design, design, personal web, wellcode, wellcodeglobal, wellcode global, html, css, scss, javascript, js">
-        <!-- <meta name="robots" content="index, follow"> -->
-        <meta name="copyright" content="Wellcode Global 2018">
-        <meta name="distribution" content="Global">
-        <meta name="rating" content="General">
-        <!-- <meta name="google-site-verification" content="CpVhxvqnJR6-GIBm9ApJMlbPi19U43042P33pRrErSs"> -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta content="yes" name="apple-touch-fullscreen" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <title>Login</title>
-        <link rel="stylesheet" href="/assets/css/home.css">
-        <!-- <link rel="shortcut icon" href="/images/favicon.ico" /> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/assets/js/fontawesome-all.js"></script>
+        <title>Material Design Light</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.css'>
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.css'>
+        <link rel='stylesheet prefetch' href='https://code.getmdl.io/1.2.1/material.blue-light_blue.min.css'>
+        <link rel="stylesheet" href="/assets/css/layout.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>        
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/assets/js/jQuery-redirect.js"></script>
     </head>
     <body>
-        <section class="dashboard" id="dashboard">
-            <div class="d-header shadow-outset-sm">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 no-padding">
-                            <div class="col-3 no-padding">
-                                <div class="d-logo">
-                                    <p>Personal Web Design</p>
-                                </div>
-                            </div>
-                            <div class="col-9 no-padding">
-                                <div class="col-1 no-padding">
-                                    <div class="d-flex justify-content-start">
-                                        <div class="d-mini" id="d-mini">
-                                            <p class="fas fa-bars"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-11 no-padding">
-                                    <div class="d-personal-box">
-                                        <ul class="d-ul d-flex justify-content-end centered-items">
-                                            <li class="d-notifications" onclick="notifShower()">
-                                                <div class="dropdown-notif" data-toggle="dropdown">
-                                                    <i class="far fa-bell fa-fw notif-bell"></i>
-                                                    <div class="notif-content" id="notif-content">
-                                                        <p>You have 3 new notifications</p>
-                                                        <hr>
-                                                        <ul>
-                                                            <li>
-                                                                <p><i class="fas fa-exclamation-triangle fa-fw"></i> Very long description here that may not fit into the page and may cause design problems</p>
-                                                            </li>
-                                                            <li>
-                                                                <p><i class="fas fa-shopping-cart fa-fw"></i> You have 3 partial templates in the cart</p>
-                                                            </li>
-                                                            <li>
-                                                                <p><i class="fas fa-user fa-fw"></i> You change your password</p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <div class="d-personal-details d-flex">
-                                                <li>
-                                                    <div class="d-personal-img">
-                                                        <img src="http://via.placeholder.com/25x25" alt="User's Picture">
-                                                    </div>
-                                                </li>
-                                                <li onclick="location.href = '/logout'">
-                                                    <p>{{.name}}</p>
-                                                </li>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+        <!-- Modals  -->
+        
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer mdl-layout--fixed-header has-drawer">
+            <!-- NOTIFICATION -->
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">
+                        <div class="mdl-textfield mdl-js-textfield search">
+                            <input class="mdl-textfield__input" type="text" id="search">
+                            <label class="mdl-textfield__label" for="search">Search</label>
                         </div>
-                    </div>
+                    </span>
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Right aligned menu below button -->
+                    <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">arrow_drop_down</i>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+                        <li class="mdl-menu__item">Some Action</li>
+                        <li class="mdl-menu__item">Another Action</li>
+                        <li disabled class="mdl-menu__item">Disabled Action</li>
+                        <li class="mdl-menu__item">Yet Another Action</li>
+                    </ul>
+                    <img alt="user_image" class="user_img"/>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-3 no-padding" id="d-sidebar">
-                        {{template "navbar" .}}
-                    </div>
-                    <div class="col-9 no-padding" id="d-content">
-                        <div class="d-content">
-                            {{template "content" .}}
-                            <div class="d-proceed-btn">
-                                <a href="" class="btn btn-white btn-rounded shadow-outset-sm">
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            </header>
+             <!-- END -- NOTIFICATION -->
+            {{template "navbar"}}
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    {{template "content" .}}
                 </div>
-            </div>
-        </section>
+            </main>
+        </div>
+        <script src='https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.js'></script>
+        <script  src="/assets/js/layout.js"></script>
     </body>
-    <script type="text/javascript" src="/assets/js/home.js"></script>
 </html>
 {{end}}
