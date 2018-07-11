@@ -1,63 +1,53 @@
 {{define "content"}}
-
-<div class="col-12">
-	Name = {{.user_name}}
+<style type="text/css">
+.setwidth100 {
+width: 100%;
+}
+</style>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
+        <h6 class="mdl-cell">User Detail</h6>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <!-- <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Field</th>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                </tr>
+            </thead> -->
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Name</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_name}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Email</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_email}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Role</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_role}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Company</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_company}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Phone</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_phone}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Address</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_address}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="col-12">
-	Role = {{.user_role}}
-</div>
-<div class="col-12">
-	Email= {{.user_email}}
-</div>
-<div class="col-12">
-	Company = {{.user_company}}
-</div>
-<div class="col-12">
-	Phone = {{.user_phone}}
-</div>
-<div class="col-12">
-	Address = {{.user_address}}
-</div>
-
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#myTable').DataTable( {
-        data: {{.weblist}},
-        destroy: true,
-        "scrollX": true,
-        columns:[{title:"Id", "visible":false},{title:"Domain"},{title:"Base Cost"},{title:"Maintenance"},{title:"Service"}],
-    	initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
-    var table = $('#myTable').DataTable();
-    $('#myTable tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        $.redirect('/web/detail', {'web_id': data[0]});
-    } );
-} );
-
-</script>
-<table id="myTable"  style="width:100%" class="display">
-    <tfoot>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
+        <h6 class="mdl-cell">Web List</h6>
+        <table id="myTable"  style="width:100%" class="display">
+            <tfoot>
             <tr>
                 <th style="visibility: false">Id</th>
                 <th>Domain</th>
@@ -65,6 +55,42 @@ $(document).ready(function() {
                 <th>Maintenance</th>
                 <th>Service</th>
             </tr>
-        </tfoot>
-</table>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+$('#myTable').DataTable( {
+data: {{.weblist}},
+destroy: true,
+"scrollX": true,
+columns:[{title:"Id", "visible":false},{title:"Domain"},{title:"Base Cost"},{title:"Maintenance"},{title:"Service"}],
+initComplete: function () {
+this.api().columns().every( function () {
+var column = this;
+var select = $('<select><option value=""></option></select>')
+.appendTo( $(column.footer()).empty() )
+.on( 'change', function () {
+var val = $.fn.dataTable.util.escapeRegex(
+$(this).val()
+);
+column
+.search( val ? '^'+val+'$' : '', true, false )
+.draw();
+} );
+column.data().unique().sort().each( function ( d, j ) {
+select.append( '<option value="'+d+'">'+d+'</option>' )
+} );
+} );
+}
+} );
+var table = $('#myTable').DataTable();
+$('#myTable tbody').on('click', 'tr', function () {
+var data = table.row( this ).data();
+alert(data[0]);
+window.location = "/web/detail?id=1";
+} );
+} );
+</script>
 {{end}}

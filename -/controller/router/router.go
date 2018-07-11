@@ -27,6 +27,18 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	home.Home(w, r)
 }
 
+func UserCreate(w http.ResponseWriter, r *http.Request) {
+	user.UserCreate(w, r)
+}
+
+func UserDelete(w http.ResponseWriter, r *http.Request) {
+	user.UserDelete(w, r)
+}
+
+func UserEdit(w http.ResponseWriter, r *http.Request) {
+	user.UserEdit(w, r)
+}
+
 func Logout(w http.ResponseWriter, r *http.Request) {
 	sign.SignOut(w, r)
 }

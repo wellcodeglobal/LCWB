@@ -1,18 +1,16 @@
 *ADMIN
-	- Controller router: userlist
 	- Controller router: user/detail
-	- Create, Update user
 	- Get all web list
 	- View web detail (cant modify)
 
 
 
 *CLIENT
-	- Controller router: weblist
-	- Controller router: web/list
+	- web/list
 	- view html 
 
 	
 
 *ALL
 	- serving html file
+	- replace JQuery to pure JS

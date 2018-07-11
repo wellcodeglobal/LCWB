@@ -25,10 +25,12 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			)
 		} else {
 			data["userlist"] = template.JS(user.GetUserList())
+			data["rolelist"] = user.GetUserRole()
 			t, _ = template.ParseFiles(
 				"-/view/partial/layout.html",
 				"-/view/partial/base/admin/admin_navbar.html",
 				"-/view/partial/table/admin_user_list_table.html",
+				"-/view/partial/CRUD/crud_user.html",
 			)
 		}
 		t.ExecuteTemplate(w, "layout", data)

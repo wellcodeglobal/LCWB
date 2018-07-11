@@ -3,9 +3,10 @@
 $(document).ready(function() {
 $('#myTable').DataTable( {
 data: {{.userlist}},
+"scrollY": 300,
 destroy: true,
 "scrollX": true,
-columns:[{title:"Id", "visible":false},{title:"Name"},{title:"Email"},{title:"Company"},{title:"Phone"},{title:"Address"},{title:"Role"}],
+columns:[{title:"Id"},{title:"Name"},{title:"Email"},{title:"Company"},{title:"Phone"},{title:"Address"},{title:"Role"},{title:"Action"}],
 initComplete: function () {
 this.api().columns().every( function () {
 var column = this;
@@ -15,12 +16,10 @@ var select = $('<select><option value=""></option></select>')
 var val = $.fn.dataTable.util.escapeRegex(
 $(this).val()
 );
-
 column
 .search( val ? '^'+val+'$' : '', true, false )
 .draw();
 } );
-
 column.data().unique().sort().each( function ( d, j ) {
 select.append( '<option value="'+d+'">'+d+'</option>' )
 } );
@@ -31,55 +30,11 @@ header: true,
 footer: true
 }
 } );
-var table = $('#myTable').DataTable();
-$('#myTable tbody').on('click', 'tr', function () {
-var data = table.row( this ).data();
-$.redirect('/user/detail', {'user_id': data[0]});
-} );
 } );
 </script>
-<dialog id="action_person_dialog" class="mdl-dialog">
-<form>
-    <h6 class="mdl-dialog__title">Add New User</h6>
-    <div class="mdl-dialog__content">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="firstname">
-            <label class="mdl-textfield__label" for="firstname">First Name</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="lastname">
-            <label class="mdl-textfield__label" for="lastname">Last Name</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="email">
-            <label class="mdl-textfield__label" for="email">Email</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="role">
-            <label class="mdl-textfield__label" for="role">Role</label>
-        </div>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-            <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send installation instruction</span>
-        </label>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-            <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send email to set password</span>
-        </label>
-    </div>
-    <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button">Close</button>
-    </div>
-</form>
-</dialog>
-<div class="mdl-grid account_action">
-    <div class="mdl-cell mdl-cell--4-col action action_person">
-        <div class="inner">
-            <i class="material-icons">person_add</i>
-            <span class="title">ADD NEW USER</span>
-        </div>
-    </div>
-</div>
+
+{{template "crud_user" .}}
+
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col action account_manage">
         <h6 class="mdl-cell mdl-cell--12-col title">
@@ -89,14 +44,15 @@ $.redirect('/user/detail', {'user_id': data[0]});
             <table id="myTable"  style="width:100%" class="display">
                 <tfoot>
                 <tr>
-                    <th style="visibility: false">Id</th>
+                    <th style="visibility: false;">Id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Company</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Role</th>
-                </tr>
+                    <th style="display: none;"></th>
+                </tr> 
                 </tfoot>
             </table>
         </table>

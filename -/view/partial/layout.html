@@ -2,32 +2,33 @@
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
-        <title>Material Design Light</title>
+        <title>Wellcode Global</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.css'>
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.2.1/material.min.css'>
         <link rel='stylesheet prefetch' href='https://code.getmdl.io/1.2.1/material.blue-light_blue.min.css'>
-        <link rel="stylesheet" href="/assets/css/layout.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>        
+        <link rel='stylesheet prefetch' href='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css'>
+        <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css'>
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+        <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="/assets/css/layout.css">
+        <link rel="stylesheet" href="/assets/css/select.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/alert.css">
+        <link rel="stylesheet" href="/assets/css/mdl-jquery-modal-dialog.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
         <script type="text/javascript" src="/assets/js/jQuery-redirect.js"></script>
     </head>
     <body>
         <!-- Modals  -->
-        
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer mdl-layout--fixed-header has-drawer">
             <!-- NOTIFICATION -->
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
-                    <span class="mdl-layout-title">
-                        <div class="mdl-textfield mdl-js-textfield search">
-                            <input class="mdl-textfield__input" type="text" id="search">
-                            <label class="mdl-textfield__label" for="search">Search</label>
-                        </div>
-                    </span>
                     <div class="mdl-layout-spacer"></div>
                     <!-- Right aligned menu below button -->
                     <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
@@ -42,17 +43,23 @@
                     <img alt="user_image" class="user_img"/>
                 </div>
             </header>
-             <!-- END -- NOTIFICATION -->
+            <!-- END -- NOTIFICATION -->
             {{template "navbar"}}
             <main class="mdl-layout__content">
                 <div class="page-content">
+                    <div class="alert alert-danger" role="alert" id="alert-notification">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div id="head-alert"><strong>Success!</strong></div><div id="text-alert">You have been signed in successfully!</div>
+                    </div>
                     {{template "content" .}}
                 </div>
             </main>
         </div>
         <script src='https://storage.googleapis.com/code.getmdl.io/1.2.1/material.min.js'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.js'></script>
+        <script src='https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js'></script>
         <script  src="/assets/js/layout.js"></script>
+        <script  src="/assets/js/form-dialog.js"></script>
+        <script  src="/assets/js/mdl-jquery-modal-dialog.js"></script>
     </body>
 </html>
 {{end}}

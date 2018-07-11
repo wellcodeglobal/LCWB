@@ -1,4 +1,4 @@
-package web
+package user
 
 import (
 	"fmt"
@@ -18,10 +18,12 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, "/sign", 302)
 		} else {
 			data["userlist"] = template.JS(user.GetUserList())
+			data["rolelist"] = user.GetUserRole()
 			t, _ = template.ParseFiles(
 				"-/view/partial/layout.html",
 				"-/view/partial/base/admin/admin_navbar.html",
 				"-/view/partial/table/admin_user_list_table.html",
+				"-/view/partial/CRUD/crud_user.html",
 			)
 		}
 		t.ExecuteTemplate(w, "layout", data)

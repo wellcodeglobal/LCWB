@@ -1,5 +1,4 @@
 {{define "content"}}
-
 <script type="text/javascript">
 	function preview(){
 		$.redirect('/preview', {'html_id': {{.web_id}}});
@@ -8,6 +7,16 @@
 		$.redirect('/edit/html', {'html_id': {{.web_id}},'type':1,'previous': {{.previous}}});
 	}
 </script>
+
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col action account_manage">
+        <h6 class="mdl-cell mdl-cell--12-col title">
+        Manage Users
+        </h6>
+        
+    </div>
+</div>
 
 <div class="col-12">
 	Domain = {{.domain}}
@@ -49,5 +58,4 @@
 <div class="col-6">
 	<button onclick="edit()">Kustomisasi Web</button>
 </div>
-
 {{end}}

@@ -13,8 +13,9 @@ import (
 var t *template.Template
 
 func WebDetail(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()
-	if r.FormValue("web_id") == "" {
+	web_id := r.URL.Query()["id"][0]
+	fmt.Println(web_id)
+	if web_id == "" {
 		http.Redirect(w, r, "/home", 302)
 	} else {
 		session_val := session.CheckSession(r)
@@ -23,21 +24,21 @@ func WebDetail(w http.ResponseWriter, r *http.Request) {
 			data := user.GetUserData(sesion_str)
 			var web_data map[string]interface{}
 			if data["role"] == "Admin" {
-				web_data = user.GetUserWebDetail("Admin", r.FormValue("web_id"))
+				web_data = user.GetUserWebDetail("Admin", web_id)
 				t, _ = template.ParseFiles(
 					"-/view/partial/layout.html",
 					"-/view/partial/base/admin/admin_navbar.html",
 					"-/view/partial/detail/web_detail.html",
 				)
 			} else {
-				web_data = user.GetUserWebDetail(sesion_str, r.FormValue("web_id"))
+				web_data = user.GetUserWebDetail(sesion_str, web_id)
 				t, _ = template.ParseFiles(
 					"-/view/partial/layout.html",
 					"-/view/partial/base/customer/customer_navbar.html",
 					"-/view/partial/detail/web_detail.html",
 				)
 				//Detail untuk setiap Part
-				data["arr_part"] = html.GetUserWebPart(sesion_str, r.FormValue("web_id"))
+				data["arr_part"] = html.GetUserWebPart(sesion_str, web_id)
 				//data["previous"] = user.GetUserHTMLPart(sesion_str, r.FormValue("web_id"), "1")
 			}
 			if web_data == nil {
