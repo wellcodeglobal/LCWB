@@ -8,12 +8,6 @@ width: 100%;
     <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
         <h6 class="mdl-cell">User Detail</h6>
         <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
-            <!-- <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Field</th>
-                    <th class="mdl-data-table__cell--non-numeric"></th>
-                </tr>
-            </thead> -->
             <tbody>
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric name">Name</td>
@@ -61,6 +55,7 @@ width: 100%;
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+    user_id = {{.user_id}};
 $('#myTable').DataTable( {
 data: {{.weblist}},
 destroy: true,
@@ -88,8 +83,7 @@ select.append( '<option value="'+d+'">'+d+'</option>' )
 var table = $('#myTable').DataTable();
 $('#myTable tbody').on('click', 'tr', function () {
 var data = table.row( this ).data();
-alert(data[0]);
-window.location = "/web/detail?id=1";
+window.location = "/web/detail?web="+data[0]+"&user="+user_id;
 } );
 } );
 </script>

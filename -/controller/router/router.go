@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 	config "github.com/wellcode/LCWB/-/config"
 	create "github.com/wellcode/LCWB/-/controller/create"
+	download "github.com/wellcode/LCWB/-/controller/download"
 	edithtml "github.com/wellcode/LCWB/-/controller/edit_html"
 	home "github.com/wellcode/LCWB/-/controller/home"
 	preview "github.com/wellcode/LCWB/-/controller/preview"
@@ -25,6 +26,10 @@ var t *template.Template
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	home.Home(w, r)
+}
+
+func Download(w http.ResponseWriter, r *http.Request) {
+	download.Download(w, r)
 }
 
 func UserCreate(w http.ResponseWriter, r *http.Request) {

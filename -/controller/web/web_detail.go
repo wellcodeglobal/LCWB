@@ -13,9 +13,9 @@ import (
 var t *template.Template
 
 func WebDetail(w http.ResponseWriter, r *http.Request) {
-	web_id := r.URL.Query()["id"][0]
-	fmt.Println(web_id)
-	if web_id == "" {
+	web_id := r.URL.Query()["web"][0]
+	user_id := r.URL.Query()["user"][0]
+	if web_id == "" && user_id == "" {
 		http.Redirect(w, r, "/home", 302)
 	} else {
 		session_val := session.CheckSession(r)
@@ -30,6 +30,11 @@ func WebDetail(w http.ResponseWriter, r *http.Request) {
 					"-/view/partial/base/admin/admin_navbar.html",
 					"-/view/partial/detail/web_detail.html",
 				)
+				user_data := user.GetUserDetail(user_id)
+				data["user_name"] = user_data["name"]
+				data["user_phone"] = user_data["phone"]
+				data["user_email"] = user_data["email"]
+				data["arr_part"] = html.GetUserWebPartAdmin(web_id)
 			} else {
 				web_data = user.GetUserWebDetail(sesion_str, web_id)
 				t, _ = template.ParseFiles(

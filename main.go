@@ -38,9 +38,10 @@ func main() {
 	r.HandleFunc("/login", router.Login)
 	r.HandleFunc("/register", router.Register)
 	r.HandleFunc("/dashboard", router.Dashboard)
+	r.HandleFunc("/download", router.Download)
 	r.HandleFunc("/create", router.Create)
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/view/"))))
-	r.PathPrefix("/download/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/file/"))))
+	r.PathPrefix("/download/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./-/file/archives/"))))
 	http.ListenAndServe(addr, r)
 }
 

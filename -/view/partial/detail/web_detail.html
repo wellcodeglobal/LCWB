@@ -1,61 +1,103 @@
 {{define "content"}}
+<style type="text/css">
+.setwidth100 {
+width: 100%;
+}
+</style>
 <script type="text/javascript">
-	function preview(){
-		$.redirect('/preview', {'html_id': {{.web_id}}});
-	}
-	function edit(){
-		$.redirect('/edit/html', {'html_id': {{.web_id}},'type':1,'previous': {{.previous}}});
-	}
+function download(){
+$.redirect('/download', {'web_id': {{.web_id}},'web_name':{{.domain}}});
+}
+    function preview(){
+        $.redirect('/preview', {'web_id': {{.web_id}}});
+    }
+    function edit(){
+        $.redirect('/edit/html', {'html_id': {{.web_id}},'type':1,'previous': {{.previous}}});
+    }
 </script>
-
-
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col action account_manage">
-        <h6 class="mdl-cell mdl-cell--12-col title">
-        Manage Users
-        </h6>
-        
+<div class="mdl-grid account_action">
+    {{if ne .role "Admin"}}
+    <div class="mdl-cell mdl-cell--2-col action" onclick="edit()">
+        <div class="inner">
+            <i class="material-icons">edit</i>
+            <span class="title">Customize</span>
+        </div>
+    </div>
+    {{end}}
+    <div class="mdl-cell mdl-cell--2-col action" onclick="preview()">
+        <div class="inner">
+            <i class="material-icons">pageview</i>
+            <span class="title">Preview</span>
+        </div>
+    </div>
+    <div class="mdl-cell mdl-cell--2-col action" onclick="download()">
+        <div class="inner">
+            <i class="material-icons">cloud_download</i>
+            <span class="title">Download</span>
+        </div>
     </div>
 </div>
-
-<div class="col-12">
-	Domain = {{.domain}}
-</div>
-<div class="col-12">
-	Base Cost = {{.base_cost}}
-</div>
-<div class="col-12">
-	Service = {{.service}}
-</div>
-<div class="col-12">
-	Maintenance = {{.maintenance}}
-</div>
-<br>
-<hr style="border: solid 2px black !important;">
-<br>
-<hr>
-<div class="col-3">
-	Type
-</div>
-<div class="col-9">
-	Name
-</div>
-<hr>
-{{ range $i := .arr_part }}
-<div class="col-3">
-	{{index $i 6}}
-</div>
-<div class="col-9">
-	{{index $i 2}}
+{{if eq .role "Admin"}}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
+        <h6 class="mdl-cell">Owner</h6>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Name</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_name}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Email</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_email}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Phone</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.user_phone}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 {{end}}
-<br>
-<hr style="border: solid 2px black !important;">
-<br>
-<div class="col-6">
-	<button onclick="preview()">Lihat Web</button>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
+        <h6 class="mdl-cell">Web Detail</h6>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Domain</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.domain}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Base Cost</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.base_cost}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Service</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.service}}</b></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">Maintenance</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{.maintenance}}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="col-6">
-	<button onclick="edit()">Kustomisasi Web</button>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col action group_manage setwidth100">
+        <h6 class="mdl-cell">Web Parts</h6>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <tbody>
+                {{ range $i := .arr_part }}
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric name">{{index $i 6}}</td>
+                    <td class="mdl-data-table__cell--non-numeric"><b>{{index $i 2}}</b></td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
 </div>
 {{end}}

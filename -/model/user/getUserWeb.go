@@ -102,3 +102,16 @@ func GetUserHTMLPart(session, id, types string) string {
 		return ""
 	}
 }
+
+func CheckUserWeb(session, web_id string) bool {
+	rows, err := database.ExecuteQuery("select * from t_user_web left join t_user on t_user.id=t_user_web.user_id WHERE t_user.session_token=$1 and t_user_web.web=$2", session, web_id)
+	fmt.Println(len(rows))
+	if len(rows) > 0 && err == nil {
+		return true
+	} else {
+		if err != nil {
+			fmt.Println("ERR : CheckUserWeb - ", err)
+		}
+		return false
+	}
+}
