@@ -1,0 +1,105 @@
+{
+	"ImportPath": "github.com/wellcode/lcwb",
+	"GoVersion": "go1.10",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Comment": "v1.1.1",
+			"Rev": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.6.2-3-gcb46983",
+			"Rev": "cb4698366aa625048f3b815af6a0dea8aef9280a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Comment": "v1.1.1-2-g78f3d31",
+			"Rev": "78f3d318a8bf316cda921f25e96fd0b441c5173d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/sessions",
+			"Comment": "v1.1.1",
+			"Rev": "03b6f63cc43ef9c7240a635a5e22b13180e822b8"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Comment": "go1.0-cutoff-212-g90697d6",
+			"Rev": "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
+		},
+		{
+			"ImportPath": "github.com/lib/pq/oid",
+			"Comment": "go1.0-cutoff-212-g90697d6",
+			"Rev": "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/config",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/create",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/download",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/edit_html",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/home",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/preview",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/router",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/sign",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/user",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/controller/web",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/db",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/file",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/html",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/session",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/sign",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/user",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		},
+		{
+			"ImportPath": "github.com/wellcode/LCWB/-/model/utility",
+			"Rev": "f4dd5f35e8b3fb9d3476a3759e6b9b77eef1b6f1"
+		}
+	]
+}
