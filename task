@@ -1,16 +1,15 @@
 *ADMIN
-	- Controller router: user/detail
-	- Get all web list
-	- View web detail (cant modify)
+	- CRU web part
+	- Delete part --> check used by user or not ? ii-> if yes cant delete, else delete now OR user_html_part change into ""
 
 
 
 *CLIENT
-	- web/list
 	- view html 
 
 	
 
 *ALL
-	- serving html file
 	- replace JQuery to pure JS
+	- add db web_title
+	- tambah di web detail "web_title"

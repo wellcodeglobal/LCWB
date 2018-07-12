@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/wellcode/LCWB/-/config"
 	database "github.com/wellcode/LCWB/-/model/db"
+	html "github.com/wellcode/LCWB/-/model/html"
 	html_part "github.com/wellcode/LCWB/-/model/html"
 	session "github.com/wellcode/LCWB/-/model/session"
 	user "github.com/wellcode/LCWB/-/model/user"
@@ -46,6 +47,8 @@ func EditHTML(w http.ResponseWriter, r *http.Request) {
 			} else {
 				data["submit_link"] = template.HTML("weblist")
 			}
+			index, css, js := html.GetUserWebPartCode(html_id)
+			database.UpdateHTMLCode(html_id, index, css, js)
 			t.ExecuteTemplate(w, "layout", data)
 		} else {
 			http.Redirect(w, r, "/sign", 302)

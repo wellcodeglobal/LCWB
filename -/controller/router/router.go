@@ -13,6 +13,7 @@ import (
 	download "github.com/wellcode/LCWB/-/controller/download"
 	edithtml "github.com/wellcode/LCWB/-/controller/edit_html"
 	home "github.com/wellcode/LCWB/-/controller/home"
+	part "github.com/wellcode/LCWB/-/controller/part"
 	preview "github.com/wellcode/LCWB/-/controller/preview"
 	sign "github.com/wellcode/LCWB/-/controller/sign"
 	user "github.com/wellcode/LCWB/-/controller/user"
@@ -58,6 +59,10 @@ func Preview(w http.ResponseWriter, r *http.Request) {
 
 func WebList(w http.ResponseWriter, r *http.Request) {
 	web.WebList(w, r)
+}
+
+func PartList(w http.ResponseWriter, r *http.Request) {
+	part.PartList(w, r)
 }
 
 func UserList(w http.ResponseWriter, r *http.Request) {

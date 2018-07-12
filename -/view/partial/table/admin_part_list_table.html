@@ -1,0 +1,62 @@
+{{define "content"}}
+<script type="text/javascript">
+$(document).ready(function() {
+$('#myTable').DataTable( {
+data: {{.partlist}},
+"scrollY": 300,
+destroy: true,
+"scrollX": true,
+columns:[{title:"Id"},{title:"Name"},{title:"Type"},{title:"Price"},{title:"html_code"},{title:"css_code"},{title:"js_code"},{title:"Action"}],
+initComplete: function () {
+this.api().columns().every( function () {
+var column = this;
+var select = $('<select><option value=""></option></select>')
+.appendTo( $(column.footer()).empty() )
+.on( 'change', function () {
+var val = $.fn.dataTable.util.escapeRegex(
+$(this).val()
+);
+column
+.search( val ? '^'+val+'$' : '', true, false )
+.draw();
+} );
+column.data().unique().sort().each( function ( d, j ) {
+select.append( '<option value="'+d+'">'+d+'</option>' )
+} );
+} );
+},
+fixedHeader: {
+header: true,
+footer: true
+}
+} );
+} );
+</script>
+
+
+{{template "crud_part" .}}
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col action account_manage">
+        <h6 class="mdl-cell mdl-cell--12-col title">
+        Manage Users
+        </h6>
+        <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <table id="myTable"  style="width:100%" class="display">
+                <tfoot>
+                <tr>
+                    <th style="visibility: false;">Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Role</th>
+                    <th style="display: none;"></th>
+                </tr> 
+                </tfoot>
+            </table>
+        </table>
+    </div>
+</div>
+{{end}}
