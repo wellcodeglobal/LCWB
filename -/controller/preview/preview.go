@@ -14,7 +14,7 @@ var t *template.Template
 
 func GenerateFile(web_id, web_name string) {
 	path := "-/file/" + web_name
-	file.CreatePreviewFolder(path)
+	file.CreatePreviewFolder(path, web_name)
 	index, css, js := html.GetUserWebPartCode(web_id)
 	file.CreateFile(path + "/index.html")
 	file.CreateFile(path + "/css/style.css")

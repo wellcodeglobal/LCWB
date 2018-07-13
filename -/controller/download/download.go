@@ -32,7 +32,7 @@ func Download(w http.ResponseWriter, r *http.Request) {
 			} else {
 				filename := web_name + ".zip"
 				path := "-/file/" + web_name
-				output := "-/file/archives/" + filename
+				output := "-/file/archieves/" + filename
 				file.ZipFile(path, output)
 				DownloadFile(w, r, output, filename)
 			}

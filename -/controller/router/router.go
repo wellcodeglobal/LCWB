@@ -69,6 +69,14 @@ func PartCreate(w http.ResponseWriter, r *http.Request) {
 	part.PartCreate(w, r)
 }
 
+func PartDelete(w http.ResponseWriter, r *http.Request) {
+	part.PartDelete(w, r)
+}
+
+func PartEdit(w http.ResponseWriter, r *http.Request) {
+	part.PartEdit(w, r)
+}
+
 func UserList(w http.ResponseWriter, r *http.Request) {
 	user.UserList(w, r)
 }

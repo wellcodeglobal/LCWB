@@ -8,11 +8,10 @@
             method: "POST",
             data: $("#form-create").serialize(),
             success:function(response){
-            	console.log(response)
                 openAlert("Success", response, "alert-success");
             },
             error:function(response){
-                openAlert("Error", response, "alert-danger");
+                openAlert("Error", response.responseText, "alert-danger");
             }
         });
         return false;
@@ -28,33 +27,44 @@
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove(); 
-                window.location = "/part/list";
+                if(head_alert=="Success"){
+                    window.location = "/part/list";
+                }
             });
         }, 3000);
        return false
     }
 
     function editPart(rows){
-    	$("#edit-user-button").click();
+    	$("#edit-part-button").click();
     	//Row Data
     	id = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(0).innerHTML;
     	name = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(1).innerHTML;
-    	email = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(2).innerHTML;
-    	company = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(3).innerHTML;
-    	phone = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(4).innerHTML;
-    	address = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(5).innerHTML;
-    	role = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(6).innerHTML;
+        types = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(2).innerHTML;
+    	price = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(3).innerHTML;
+    	html = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(4).innerHTML;
+    	css = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(5).innerHTML;
+    	js = document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(6).innerHTML;
+
+        html = html.replace('<textarea rows="4" cols="30" style="resize: none;font-size: 10px;" readonly="" oncontextmenu="this.focus();this.select()">',"");
+        css = css.replace('<textarea rows="4" cols="30" style="resize: none;font-size: 10px;" readonly="" oncontextmenu="this.focus();this.select()">',"");
+        js = js.replace('<textarea rows="4" cols="30" style="resize: none;font-size: 10px;" readonly="" oncontextmenu="this.focus();this.select()">',"");
+        html = html.replace('/<textarea>',"");
+        css = css.replace('/<textarea>',"");
+        js = js.replace('/<textarea>',"");
+
     	//Inject Data to From
     	$("#id-edit").val(id);
     	$("#name-edit").val(name);
-    	$("#email-edit").val(email);
-    	$("#phone-edit").val(parseInt(phone));
-    	$("#company-edit").val(company);
-    	$("#address-edit").val(address);
+    	$("#price-edit").val(price);
+    	$("#types-edit").val(types);
+    	$("#html-edit").val(html);
+    	$("#css-edit").val(css);
+        $("#js-edit").val(js);
 
-    	var dd = document.getElementById('role-edit');
+    	var dd = document.getElementById('types-edit');
 		for (var i = 0; i < dd.options.length; i++) {
-		    if (dd.options[i].text === role) {
+		    if (dd.options[i].text === types) {
 		        dd.selectedIndex = i;
 		        break;
 		    }
@@ -64,7 +74,7 @@
     function editAPI(){
         $("#close-button2").click();
         $.ajax({
-            url:"/user/edit",
+            url:"/part/edit",
             method: "POST",
             data:$("#form-edit").serialize(),
             success:function(response){
@@ -94,10 +104,11 @@
 		        title: 'Delete',
 		        onClick: function() {
 		        		$.ajax({
-				            url:"/user/delete",
+				            url:"/part/delete",
 				            method: "POST",
 				            data:{
 					          id: id_user,
+                              name: name_part
 					        },
 				            success:function(response){
 				                openAlert("Success", response, "alert-success");
@@ -129,7 +140,7 @@
             <span class="title">Create Part</span>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--4-col action action_edit_user" style="display: none;" id="edit-user-button">
+    <div class="mdl-cell mdl-cell--4-col action action_edit_user" style="display: none;" id="edit-part-button">
         <div class="inner">
             <i class="material-icons">group_add</i>
             <span class="title"></span>
@@ -164,25 +175,17 @@
             </div>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="html" required></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="html" name="html" required></textarea>
             <label class="mdl-textfield__label" for="text-area">HTML</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="css" required></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="css" name="css" required></textarea>
             <label class="mdl-textfield__label" for="text-area">CSS</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="js"></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="js" name="js"></textarea>
             <label class="mdl-textfield__label" for="text-area">JavaScript</label>
         </div>
-        <!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-            <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send installation instruction</span>
-        </label>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-            <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send email to set password</span>
-        </label> -->
     </div>
     <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button" id="close-button">Close</button>
@@ -196,7 +199,7 @@
 <form onsubmit="return editAPI()" method="POST" id="form-edit">
     <h6 class="mdl-dialog__title">Edit Part</h6>
     <div class="mdl-dialog__content">
-    	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="id-edit" name="id-edit" required>
             <label class="mdl-textfield__label" for="id-edit">ID</label>
         </div>
@@ -204,43 +207,41 @@
             <input class="mdl-textfield__input" type="text" id="name-edit" name="name-edit" required>
             <label class="mdl-textfield__label" for="name-edit">Name</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="price-edit" id="price-edit" name="price-edit" required >
-            <label class="mdl-textfield__label" for="price-edit">Price</label>
-        </div>
-        <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-            <select class="mdl-selectfield__select" id="type-edit" name="type-edit" required>
-                {{ range $idx,$i := .parttypelist }}
-                <option value="{{index $.parttypelist $idx 0}}">{{index $.parttypelist $idx 1}}</option>
-                {{end}}
-            </select>
-            <label class="mdl-selectfield__label" for="role">Part</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="textarea" id="html-edit" name="html-edit" required>
-            <label class="mdl-textfield__label" for="html-edit">HTML</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="css-edit" name="css-edit" required >
-            <label class="mdl-textfield__label" for="css-edit">CSS</label>
+        <div class = "mdl-grid">
+            <div class = "mdl-cell mdl-cell--6-col graybox">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="price" id="price-edit" name="price-edit" required >
+                    <label class="mdl-textfield__label" for="price-edit">Price</label>
+                </div>
+            </div>
+            <div class = "mdl-cell mdl-cell--6-col graybox">
+                <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+                    <select class="mdl-selectfield__select" id="types-edit" name="types-edit" required>
+                        {{ range $idx,$i := .parttypelist }}
+                        <option value="{{index $.parttypelist $idx 0}}">{{index $.parttypelist $idx 1}}</option>
+                        {{end}}
+                    </select>
+                    <label class="mdl-selectfield__label" for="types-edit">Part</label>
+                </div>
+            </div>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="js-edit" name="js-edit" required>
-            <label class="mdl-textfield__label" for="js-edit">JS</label>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="html-edit" name="html-edit" required></textarea>
+            <label class="mdl-textfield__label" for="text-area">HTML</label>
         </div>
-        <!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-            <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send installation instruction</span>
-        </label>
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-            <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-            <span class="mdl-checkbox__label">Send email to set password</span>
-        </label> -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="css-edit" name="css-edit" required></textarea>
+            <label class="mdl-textfield__label" for="text-area">CSS</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="js-edit" name="js-edit"></textarea>
+            <label class="mdl-textfield__label" for="text-area">JavaScript</label>
+        </div>
     </div>
     <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button" id="close-button2">Close</button>
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">EDIT</button>
-        </div>
+        <button type="button" class="mdl-button" id="close-button2">Close</button>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">EDIT</button>
+    </div>
 </form>
 </dialog>
 

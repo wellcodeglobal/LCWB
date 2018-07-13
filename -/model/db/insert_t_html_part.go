@@ -7,7 +7,6 @@ import (
 func InsertHTMLPart(name, price, types, html, css, js string) (error, string) {
 	msg := ""
 	rows, err := ExecuteQuery("SELECT * from t_html_part WHERE html_code=$1;", html)
-	fmt.Println(len(rows), " - ", err)
 	if err == nil {
 		if len(rows) > 0 {
 			msg = "Error! Duplicate HTML code with\"" + rows[0]["name"] + "\"!"
@@ -17,7 +16,7 @@ func InsertHTMLPart(name, price, types, html, css, js string) (error, string) {
 			if err != nil {
 				fmt.Println("Err : InsertHTMLPart - ", err)
 			}
-			msg = "Create part HTML \"" + name + "\"" + " done! refreshing this page."
+			msg = "Create HTML part \"" + name + "\"" + " done! refreshing this page."
 			return err, msg
 		}
 	} else {

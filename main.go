@@ -31,6 +31,8 @@ func main() {
 	r.HandleFunc("/web/detail", router.WebDetail)
 	r.HandleFunc("/part/list", router.PartList)
 	r.HandleFunc("/part/create", router.PartCreate)
+	r.HandleFunc("/part/delete", router.PartDelete)
+	r.HandleFunc("/part/edit", router.PartEdit)
 	r.HandleFunc("/preview", router.Preview)
 	r.HandleFunc("/edit/html", router.EditHTML)
 	r.HandleFunc("/sign", router.SignIn)

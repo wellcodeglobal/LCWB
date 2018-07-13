@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func CreatePreviewFolder(path string) {
+func CreatePreviewFolder(path, web_name string) {
 	if _, err := os.Stat(path); err == nil {
 		RemoveContents(path)
 	}

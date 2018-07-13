@@ -7,7 +7,7 @@ import (
 func DeleteUser(id string) error {
 	_, err := ExecuteQuery("DELETE FROM t_user WHERE id=$1;", id)
 	if err != nil {
-		fmt.Println("Err : UpdateUserHTMLPart - ", err)
+		fmt.Println("Err : DeleteUser - ", err)
 		return err
 	} else {
 		return err
