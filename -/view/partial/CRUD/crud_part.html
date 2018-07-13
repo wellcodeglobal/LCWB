@@ -4,9 +4,9 @@
     function create(){
         $("#close-button").click();
         $.ajax({
-            url:"/user/create",
+            url:"/part/create",
             method: "POST",
-            data: $("form").serialize(),
+            data: $("#form-create").serialize(),
             success:function(response){
             	console.log(response)
                 openAlert("Success", response, "alert-success");
@@ -28,15 +28,10 @@
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove(); 
-                window.location = "/user/list";
+                window.location = "/part/list";
             });
         }, 3000);
        return false
-    }
-
-    function detailPart(rows){
-    	id =document.getElementById("myTable").rows[rows.parentElement.parentElement.rowIndex].cells.item(0).innerHTML;
-    	$.redirect('/user/detail', {'user_id': id});
     }
 
     function editPart(rows){
@@ -150,29 +145,35 @@
             <input class="mdl-textfield__input" type="text" id="name" name="name" required>
             <label class="mdl-textfield__label" for="name">Name</label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="price" id="price" name="price" required >
-            <label class="mdl-textfield__label" for="price">Price</label>
-        </div>
-        <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-            <select class="mdl-selectfield__select" id="type" name="type" required>
-                {{ range $idx,$i := .parttypelist }}
-                <option value="{{index $.parttypelist $idx 0}}">{{index $.parttypelist $idx 1}}</option>
-                {{end}}
-            </select>
-            <label class="mdl-selectfield__label" for="role">Part</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="textarea" id="html" name="html" required>
-            <label class="mdl-textfield__label" for="html">HTML</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="css" name="css" required >
-            <label class="mdl-textfield__label" for="css">CSS</label>
+        <div class = "mdl-grid">
+            <div class = "mdl-cell mdl-cell--6-col graybox">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="price" id="price" name="price" required >
+                    <label class="mdl-textfield__label" for="price">Price</label>
+                </div>
+            </div>
+            <div class = "mdl-cell mdl-cell--6-col graybox">
+                <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+                    <select class="mdl-selectfield__select" id="type" name="types" required>
+                        {{ range $idx,$i := .parttypelist }}
+                        <option value="{{index $.parttypelist $idx 0}}">{{index $.parttypelist $idx 1}}</option>
+                        {{end}}
+                    </select>
+                    <label class="mdl-selectfield__label" for="role">Part</label>
+                </div>
+            </div>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="number" id="js" name="js" required>
-            <label class="mdl-textfield__label" for="js">JS</label>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="html" required></textarea>
+            <label class="mdl-textfield__label" for="text-area">HTML</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="css" required></textarea>
+            <label class="mdl-textfield__label" for="text-area">CSS</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="js"></textarea>
+            <label class="mdl-textfield__label" for="text-area">JavaScript</label>
         </div>
         <!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
             <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input">

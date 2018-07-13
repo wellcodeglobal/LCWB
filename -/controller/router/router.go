@@ -65,6 +65,10 @@ func PartList(w http.ResponseWriter, r *http.Request) {
 	part.PartList(w, r)
 }
 
+func PartCreate(w http.ResponseWriter, r *http.Request) {
+	part.PartCreate(w, r)
+}
+
 func UserList(w http.ResponseWriter, r *http.Request) {
 	user.UserList(w, r)
 }

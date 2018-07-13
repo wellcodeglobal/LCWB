@@ -1,7 +1,7 @@
-package user
+package part
 
 import (
-	//"fmt"
+	"fmt"
 	db "github.com/wellcode/LCWB/-/model/db"
 	session "github.com/wellcode/LCWB/-/model/session"
 	//"html/template"
@@ -9,21 +9,21 @@ import (
 	"strings"
 )
 
-func UserCreate(w http.ResponseWriter, r *http.Request) {
+func PartCreate(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	session_val := session.CheckSession(r)
+	name := r.FormValue("name")
+	price := r.FormValue("price")
+	types := r.FormValue("types")
+	html := r.FormValue("html")
+	css := r.FormValue("css")
+	js := r.FormValue("js")
 	if session_val != nil {
-		if r.FormValue("name") == "" {
+		if r.FormValue("name") == "" || price == "" || types == "" || html == "" || css == "" {
 			http.Redirect(w, r, "/sign", 302)
 		} else {
-			name := r.FormValue("name")
-			email := r.FormValue("email")
-			password := r.FormValue("password")
-			phone := r.FormValue("phone")
-			address := r.FormValue("address")
-			company := r.FormValue("company")
-			role := r.FormValue("role")
-			err, msg := db.InsertUser(name, email, phone, address, company, role, password)
+			err, msg := db.InsertHTMLPart(name, price, types, html, css, js)
+			fmt.Println(msg)
 			check := strings.Contains(msg, "Error")
 			if err == nil {
 				if check {
