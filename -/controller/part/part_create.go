@@ -18,12 +18,12 @@ func PartCreate(w http.ResponseWriter, r *http.Request) {
 	html := r.FormValue("html")
 	css := r.FormValue("css")
 	js := r.FormValue("js")
+	fmt.Println(name, price, types, html, css, js)
 	if session_val != nil {
 		if r.FormValue("name") == "" || price == "" || types == "" || html == "" || css == "" {
 			http.Redirect(w, r, "/sign", 302)
 		} else {
 			err, msg := db.InsertHTMLPart(name, price, types, html, css, js)
-			fmt.Println(msg)
 			check := strings.Contains(msg, "Error")
 			if err == nil {
 				if check {
