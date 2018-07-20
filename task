@@ -1,12 +1,9 @@
 *ADMIN
-	- CRU web part
-	- Delete part --> check used by user or not ? ii-> if yes cant delete, else delete now OR user_html_part change into ""
-
-
+	- create part ==> img
+	- download html part
 
 *CLIENT
 	- view html 
-
 	
 
 *ALL

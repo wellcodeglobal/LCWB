@@ -1,17 +1,49 @@
 {{define "content"}}
-
+<script type="text/javascript">
+	function submit(){
+		document.getElementById("submitButton").click();
+	}
+	function changeImg(){
+		var newpart = document.getElementById("new_part").value;
+		var imgpart = document.getElementById("imgpart");
+		imgpart.src="/assets/img/part-img/"+newpart+".gif";
+	}
+</script>
 <form action="/{{.submit_link}}" method="post" accept-charset="utf-8">
 	<input type="text" name="previous" value="{{.previous}}" hidden>
 	<input type="text" name="html_id" value="{{.html_id}}" hidden>
 	<input type="text" name="type" value="{{.type}}" hidden>
-<select name="new_part">
-{{ range $i := .html_part_list }}
-	<option value="{{index $i 0}}" >{{index $i 1}}</option>
-{{end}}
-</select>
-<button type="submit">Next</button>
+	<button type="submit" id="submitButton" hidden>Next</button>
+	<div class="mdl-grid account_action">
+		<div class="mdl-cell mdl-cell--2-col">
+			<div class="inner">
+				<i class="material-icons">person_add</i>
+				<select name="new_part" class="selectpicker" id="new_part" style="width: auto;" onclick="changeImg()">
+					{{ range $idx,$i := .html_part_list }}
+					<option value="{{index $i 0}}">{{$idx}}</option>
+					{{end}}
+				</select>
+			</div>
+		</div>
+		<div class="mdl-cell mdl-cell--8-col">
+			<div class="inner">
+				
+			</div>
+		</div>
+		<div class="mdl-cell mdl-cell--2-col" onclick="submit()">
+			<div class="inner">
+				<i class="material-icons">person_add</i>
+				<span class="title">NEXT</span>
+			</div>
+		</div>
+	</div>
 </form>
 
-
-
+<div class="mdl-grid account_action">
+		<div class="mdl-cell mdl-cell--12-col">
+			<div class="inner">
+				<img src="/assets/img/part-img/{{index .html_part_list 0 0}}.gif" id="imgpart" style="width: 100%; height: 100%;">
+			</div>
+		</div>
+	</div>
 {{end}}

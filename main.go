@@ -12,10 +12,12 @@ import (
 
 func main() {
 	fmt.Println("Running on " + config.Base_Port + " ...")
-	database.Connect()
 	addr, err := determineListenAddress()
 	if err != nil {
 		addr = config.Base_Port
+		database.Connect()
+	} else {
+
 	}
 	r := mux.NewRouter()
 	r.HandleFunc("/", router.PartialList)

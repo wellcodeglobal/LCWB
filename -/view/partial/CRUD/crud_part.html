@@ -1,11 +1,57 @@
 {{define "crud_part"}}
 
+<style type="text/css">
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    z-index: 10;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mdl-layout__header, .sidenav {
+    z-index: 1;
+}
+</style>
+
 <script type="text/javascript">
     function create(){
         $("#close-button").click();
         $.ajax({
             url:"/part/create",
             method: "POST",
+            enctype: 'multipart/form-data',
+            processData: false,  // Important!
+            contentType: false,
             data: $("#form-create").serialize(),
             success:function(response){
                 openAlert("Success", response, "alert-success");
@@ -15,6 +61,34 @@
             }
         });
         return false;
+    }
+
+    function previewPart(rows){
+        var modal = document.getElementById('imgModal');
+
+        var btn = document.getElementById(rows);
+
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+            document.getElementById("imgModal--img").src = "/assets/img/part-img/"+rows+".gif"
+            
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+
+    function openImg(src){
+        document.getElementById("openImgModal").click();
     }
 
     function openAlert(head_alert,text_alert,alert_type){
@@ -130,8 +204,39 @@
 	    });
 		return false
     }
-    
+
 </script>
+
+<button id="openImgModal" hidden></button>
+
+<div id="imgModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="imgModal--img" style="width: 100%;">
+  </div>
+
+</div>
+
+<div class="modal fade" id="" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="mdl-grid account_action">
     <div class="mdl-cell mdl-cell--2-col action action_person">
@@ -149,7 +254,7 @@
 </div>
 
 <dialog id="action_person_dialog" class="mdl-dialog">
-<form onsubmit="return create()" id="form-create">
+<form onsubmit="return create()" id="form-create"  enctype="multipart/form-data">
     <h6 class="mdl-dialog__title">Create New Part</h6>
     <div class="mdl-dialog__content">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -165,7 +270,7 @@
             </div>
             <div class = "mdl-cell mdl-cell--6-col graybox">
                 <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-                    <select class="mdl-selectfield__select" id="type" name="types" required>
+                    <select class="mdl-selectfield__select" id="types" name="types" required>
                         {{ range $idx,$i := .parttypelist }}
                         <option value="{{index $.parttypelist $idx 0}}">{{index $.parttypelist $idx 1}}</option>
                         {{end}}
@@ -175,16 +280,19 @@
             </div>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="html" name="html" required></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3"  id="html" name="html" required></textarea>
             <label class="mdl-textfield__label" for="text-area">HTML</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="css" name="css" required></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="css" name="css" required></textarea>
             <label class="mdl-textfield__label" for="text-area">CSS</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <textarea class="mdl-textfield__input" type="text" rows="3" id="text-area" id="js" name="js"></textarea>
+            <textarea class="mdl-textfield__input" type="text" rows="3" id="js" name="js"></textarea>
             <label class="mdl-textfield__label" for="text-area">JavaScript</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input type="file" name="file" id="file" name="file">
         </div>
     </div>
     <div class="mdl-dialog__actions">

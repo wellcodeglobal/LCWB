@@ -5,6 +5,7 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	database "github.com/wellcode/LCWB/-/config"
+	"os"
 )
 
 var Execute *sql.DB
@@ -33,6 +34,15 @@ func Conn() *sql.DB {
 
 func Connect() {
 	conn, err := sql.Open(infoDb.adapter, dbinfo)
+	if err != nil {
+		panic(err)
+	}
+	Execute = conn
+	fmt.Println("Open Database Success ...")
+}
+
+func ConnectHeroku() {
+	conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		panic(err)
 	}
